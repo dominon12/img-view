@@ -1,18 +1,23 @@
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
+import { useAppDispatch } from "../redux/hooks";
+import { deletePhoto } from "../redux/photos/slice";
 
 import "./PhotoCard.scss";
 
 type Props = {
+  id: number;
   title: string;
   thumbnailUrl: string;
   imageUrl: string;
 };
 
 const PhotoCard: React.FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
+
   const expand = () => {};
 
-  const onDelete = () => {};
+  const onDelete = () => dispatch(deletePhoto({ id: props.id }));
 
   return (
     <article className="photo-card">
