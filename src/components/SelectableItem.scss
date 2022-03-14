@@ -6,7 +6,8 @@
   background-color: var(--color-white);
 
   &__selected {
-    background-color: var(---color-gray);
+    background-color: var(--color-black);
+    color: var(--color-white);
   }
 
   &__not-selected {

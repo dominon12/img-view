@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import "./AlbumIdSelector.scss";
 import Label from "./Label";
@@ -7,18 +7,30 @@ import { loadAlbumIds } from "../redux/album-ids/thunks";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectAlbumIds } from "../redux/album-ids/selectors";
 import SelectableItem from "./SelectableItem";
+import { loadPhotos } from "../redux/photos/thunks";
+import {
+  selectPhotosPage,
+  selectSelectedAlbumId,
+} from "../redux/photos/selectors";
+import { setPhotosSelectedAlbumId } from "../redux/photos/slice";
 
 const AlbumIdSelector: React.FC = () => {
   const dispatch = useAppDispatch();
   const albumIds = useAppSelector(selectAlbumIds);
-
-  const [selectedAlbumId, setSelectedAlbumId] = useState<number>();
+  const photosPage = useAppSelector(selectPhotosPage);
+  const selectedAlbumId = useAppSelector(selectSelectedAlbumId);
 
   useEffect(() => {
     dispatch(loadAlbumIds());
   }, []);
 
-  const onAlbumIdSelect = () => {};
+  const onAlbumIdSelect = (albumId?: number) => {
+    if (selectedAlbumId === albumId) {
+      albumId = undefined;
+    }
+    dispatch(setPhotosSelectedAlbumId(albumId));
+    dispatch(loadPhotos(photosPage, albumId));
+  };
 
   return (
     <nav className="album-id-selector">
@@ -30,7 +42,7 @@ const AlbumIdSelector: React.FC = () => {
             {albumIds.data.map((albumId) => (
               <SelectableItem
                 isSelected={selectedAlbumId === albumId}
-                onClick={onAlbumIdSelect}
+                onClick={() => onAlbumIdSelect(albumId)}
               >
                 {albumId}
               </SelectableItem>

@@ -1,4 +1,4 @@
-import { setPhotosData, setPhotosError, setPhotosLoading } from "./slice";
+import { setPhotos, setPhotosError, setPhotosLoading } from "./slice";
 import { AppDispatch } from "../types";
 import api from "../../packages/api";
 
@@ -16,5 +16,5 @@ export const loadPhotos =
     }
 
     dispatch(setPhotosError(null));
-    dispatch(setPhotosData(data.data ?? []));
+    dispatch(setPhotos(data.data ?? []));
   };
