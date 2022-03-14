@@ -1,8 +1,7 @@
-import { baseUrl } from "../config";
 import makeRequest from "../makeRequest";
 import Photo from "../../../types/api/Photo";
 
-const basePath = baseUrl + "photos/";
+const basePath = "photos/";
 
 export const list = (page?: number) => {
   return makeRequest<Photo[]>({

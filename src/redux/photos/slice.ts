@@ -1,15 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import Photo from "../../types/api/Photo";
+import { InitialState } from "../types";
 
-type PhotosSliceState = {
-  photos: Photo[];
-  isLoading: boolean;
-  error: string | null;
-};
-
-const initialState: PhotosSliceState = {
-  photos: [],
+const initialState: InitialState<Photo[]> = {
+  data: [],
   isLoading: false,
   error: null,
 };
@@ -19,7 +14,7 @@ const photosSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action: PayloadAction<Photo[]>) => {
-      state.photos = action.payload;
+      state.data = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;

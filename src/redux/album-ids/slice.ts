@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type AlbumIdsSliceState = {
-  albumIds: number[];
-  isLoading: boolean;
-  error: string | null;
-};
+import { InitialState } from "../types";
 
-const initialState: AlbumIdsSliceState = {
-  albumIds: [],
+const initialState: InitialState<number[]> = {
+  data: [],
   isLoading: false,
   error: null,
 };
@@ -17,7 +13,7 @@ const albumIdsSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action: PayloadAction<number[]>) => {
-      state.albumIds = action.payload;
+      state.data = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
