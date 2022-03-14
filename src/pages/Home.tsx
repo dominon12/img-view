@@ -1,14 +1,14 @@
 import React from "react";
 
 import "./Home.scss";
-import PhotosGrid from "../components/PhotosGrid";
 import AlbumIdSelector from "../components/AlbumIdSelector";
+import PhotosGridWithPagination from "../components/PhotosGridWithPagination";
 
 const Home: React.FC = () => {
   return (
     <main className="home-page">
       <AlbumIdSelector />
-      <PhotosGrid />
+      <PhotosGridWithPagination />
     </main>
   );
 };
