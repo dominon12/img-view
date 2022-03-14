@@ -29,6 +29,11 @@ const photosSlice = createSlice({
     setAlbumId: (state, action: PayloadAction<number | undefined>) => {
       state.data.selectedAlbumId = action.payload;
     },
+    deletePhoto: (state, action: PayloadAction<{ id: number }>) => {
+      state.data.photos = state.data.photos.filter(
+        (p) => p.id !== action.payload.id
+      );
+    },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
@@ -40,6 +45,7 @@ const photosSlice = createSlice({
 
 export const {
   setPhotos,
+  deletePhoto,
   setPage: setPhotosPage,
   setAlbumId: setPhotosSelectedAlbumId,
   setLoading: setPhotosLoading,

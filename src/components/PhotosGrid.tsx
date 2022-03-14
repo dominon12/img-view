@@ -5,8 +5,8 @@ import PhotoCard from "./PhotoCard";
 import Photo from "../types/api/Photo";
 
 type Props = {
-  photos: Photo[]
-}
+  photos: Photo[];
+};
 
 const PhotosGrid: React.FC<Props> = (props) => {
   return (
@@ -14,6 +14,7 @@ const PhotosGrid: React.FC<Props> = (props) => {
       {props.photos.map((photo) => (
         <PhotoCard
           key={photo.id}
+          id={photo.id}
           thumbnailUrl={photo.thumbnailUrl}
           imageUrl={photo.url}
           title={photo.title}
