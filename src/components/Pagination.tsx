@@ -1,5 +1,8 @@
 import React from "react";
-import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import {
+  BsFillArrowLeftCircleFill,
+  BsFillArrowRightCircleFill,
+} from "react-icons/bs";
 
 import "./Pagination.scss";
 
@@ -33,13 +36,13 @@ const Pagination: React.FC<Props> = (props) => {
         className="pagination__arrow"
         onClick={() => changePage("backwards")}
       >
-        <BiLeftArrow />
+        <BsFillArrowLeftCircleFill />
       </div>
 
       <div className="pagination__current-page">{props.currentPage}</div>
 
       <div className="pagination__arrow" onClick={() => changePage("forward")}>
-        <BiRightArrow />
+        <BsFillArrowRightCircleFill />
       </div>
     </div>
   ) : null;
