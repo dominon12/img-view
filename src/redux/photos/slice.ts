@@ -3,8 +3,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Photo from "../../types/api/Photo";
 import { InitialState } from "../types";
 
-const initialState: InitialState<Photo[]> = {
-  data: [],
+const initialState: InitialState<{
+  photos: Photo[];
+  page: number;
+  selectedAlbumId?: number;
+}> = {
+  data: {
+    photos: [],
+    page: 1,
+  },
   isLoading: false,
   error: null,
 };
@@ -13,8 +20,14 @@ const photosSlice = createSlice({
   name: "photos",
   initialState,
   reducers: {
-    setData: (state, action: PayloadAction<Photo[]>) => {
-      state.data = action.payload;
+    setPhotos: (state, action: PayloadAction<Photo[]>) => {
+      state.data.photos = action.payload;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.data.page = action.payload;
+    },
+    setAlbumId: (state, action: PayloadAction<number | undefined>) => {
+      state.data.selectedAlbumId = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
@@ -26,7 +39,9 @@ const photosSlice = createSlice({
 });
 
 export const {
-  setData: setPhotosData,
+  setPhotos,
+  setPage: setPhotosPage,
+  setAlbumId: setPhotosSelectedAlbumId,
   setLoading: setPhotosLoading,
   setError: setPhotosError,
 } = photosSlice.actions;

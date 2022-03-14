@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import "./PhotosGridWithPagination.scss";
 import Pagination from "./Pagination";
@@ -7,30 +7,29 @@ import ApiResponseTemplate from "./ApiResponseTemplate";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectPhotos } from "../redux/photos/selectors";
 import { loadPhotos } from "../redux/photos/thunks";
-
+import { setPhotosPage } from "../redux/photos/slice";
 
 const PhotosGridWithPagination: React.FC = () => {
   const dispatch = useAppDispatch();
   const photos = useAppSelector(selectPhotos);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    dispatch(loadPhotos(currentPage));
+    dispatch(loadPhotos(photos.data.page));
   }, []);
 
   const handleChangePage = (nextPage: number) => {
-    setCurrentPage(nextPage);
-    dispatch(loadPhotos(nextPage));
+    dispatch(setPhotosPage(nextPage));
+    dispatch(loadPhotos(nextPage, photos.data.selectedAlbumId));
   };
 
   return (
     <ApiResponseTemplate
       render={() => (
         <div className="photos-with-pagination">
-          <PhotosGrid photos={photos.data} />
+          <PhotosGrid photos={photos.data.photos} />
           <Pagination
             pagesCount={500}
-            currentPage={currentPage}
+            currentPage={photos.data.page}
             handleChangePage={handleChangePage}
           />
         </div>

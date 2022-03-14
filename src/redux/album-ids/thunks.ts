@@ -9,7 +9,7 @@ const extractAlbumIds = (photos: Photo[]) =>
 export const loadAlbumIds = () => async (dispatch: AppDispatch) => {
   dispatch(setAlbumIdsLoading(true));
 
-  const data = await api.photos.list();
+  const data = await api.photos.list({});
 
   dispatch(setAlbumIdsLoading(false));
 
