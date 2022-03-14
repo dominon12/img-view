@@ -1,37 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./PhotosGrid.scss";
-import ApiResponseTemplate from "./ApiResponseTemplate";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectPhotos } from "../redux/photos/selectors";
-import { loadPhotos } from "../redux/photos/thunks";
 import PhotoCard from "./PhotoCard";
+import Photo from "../types/api/Photo";
 
-const PhotosGrid: React.FC = (props) => {
-  const dispatch = useAppDispatch();
-  const photos = useAppSelector(selectPhotos);
+type Props = {
+  photos: Photo[]
+}
 
-  useEffect(() => {
-    dispatch(loadPhotos(1));
-  }, []);
-
+const PhotosGrid: React.FC<Props> = (props) => {
   return (
-    <ApiResponseTemplate
-      render={() => (
-        <section className="photos-grid">
-          {photos.data.map((photo) => (
-            <PhotoCard
-              key={photo.id}
-              thumbnailUrl={photo.thumbnailUrl}
-              imageUrl={photo.url}
-              title={photo.title}
-            />
-          ))}
-        </section>
-      )}
-      loading={photos.isLoading}
-      error={photos.error}
-    />
+    <section className="photos-grid">
+      {props.photos.map((photo) => (
+        <PhotoCard
+          key={photo.id}
+          thumbnailUrl={photo.thumbnailUrl}
+          imageUrl={photo.url}
+          title={photo.title}
+        />
+      ))}
+    </section>
   );
 };
 
