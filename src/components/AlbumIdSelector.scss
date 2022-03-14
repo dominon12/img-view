@@ -1,0 +1,11 @@
+.album-id-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__list-of-ids {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+}
