@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { useAppDispatch } from "../redux/hooks";
-import { deletePhoto } from "../redux/photos/slice";
 
 import "./PhotoCard.scss";
+import ExpandedPhoto from "./ExpandedPhoto";
+import { useAppDispatch } from "../redux/hooks";
+import { deletePhoto } from "../redux/photos/slice";
 
 type Props = {
   id: number;
@@ -14,8 +15,12 @@ type Props = {
 
 const PhotoCard: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
+  const [expanded, setExpanded] = useState(false);
 
-  const expand = () => {};
+  const setDialogOpen = (open: boolean) => {
+    setExpanded(open);
+    document.body.style.overflow = open ? "hidden" : "auto";
+  };
 
   const onDelete = () => dispatch(deletePhoto({ id: props.id }));
 
@@ -32,8 +37,16 @@ const PhotoCard: React.FC<Props> = (props) => {
         alt={props.title}
         width="150"
         height="150"
-        onClick={expand}
+        onClick={() => setDialogOpen(true)}
       />
+
+      {expanded && (
+        <ExpandedPhoto
+          photoUrl={props.imageUrl}
+          close={() => setDialogOpen(false)}
+          alt={props.title}
+        />
+      )}
     </article>
   );
 };

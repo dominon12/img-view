@@ -1,0 +1,42 @@
+.expanded-photo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(1rem);
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    color: var(--color-white);
+
+    svg {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__photo {
+    @media (max-width: 658px) {
+      width: 400px;
+      height: 400px;
+    }
+    @media (max-width: 458px) {
+      width: 300px;
+      height: 300px;
+    }
+    @media (max-width: 350px) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
