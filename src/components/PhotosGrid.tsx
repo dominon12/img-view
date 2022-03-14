@@ -5,6 +5,7 @@ import ApiResponseTemplate from "./ApiResponseTemplate";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectPhotos } from "../redux/photos/selectors";
 import { loadPhotos } from "../redux/photos/thunks";
+import PhotoCard from "./PhotoCard";
 
 const PhotosGrid: React.FC = (props) => {
   const dispatch = useAppDispatch();
@@ -19,7 +20,12 @@ const PhotosGrid: React.FC = (props) => {
       render={() => (
         <section className="photos-grid">
           {photos.data.map((photo) => (
-            <></>
+            <PhotoCard
+              key={photo.id}
+              thumbnailUrl={photo.thumbnailUrl}
+              imageUrl={photo.url}
+              title={photo.title}
+            />
           ))}
         </section>
       )}

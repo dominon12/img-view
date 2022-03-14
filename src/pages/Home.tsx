@@ -1,7 +1,12 @@
 import React from "react";
+import PhotosGrid from "../components/PhotosGrid";
 
 const Home: React.FC = () => {
-  return <div>Home</div>;
+  return (
+    <main className="home-page">
+      <PhotosGrid />
+    </main>
+  );
 };
 
 export default Home;
