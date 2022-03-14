@@ -1,0 +1,18 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  &__arrow {
+    cursor: pointer;
+
+    svg {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__current-page {
+    font-size: 1.2rem;
+  }
+}
